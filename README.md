@@ -101,7 +101,7 @@ demo:
 </tr>
 <tr>
 	<th>HGETALL</th>
-    <th>获取散列包含的所以键值对</th>
+    <th>获取散列包含的所有键值对</th>
 </tr>
 <tr>
     <th>HDEL</th>
