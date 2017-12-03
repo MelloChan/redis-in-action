@@ -1,6 +1,7 @@
 package ch00;
 
 import redis.clients.jedis.Jedis;
+import util.RedisServer;
 
 /**
  * set
@@ -8,7 +9,7 @@ import redis.clients.jedis.Jedis;
  */
 public class RedisSet {
     public static void main(String[] args) {
-        Jedis jedis=RedisServer.getInstance();
+        Jedis jedis= RedisServer.getInstance();
         jedis.sadd("set-demo","s1");
         jedis.sadd("set-demo","s2");
         System.out.println(jedis.smembers("set-demo"));

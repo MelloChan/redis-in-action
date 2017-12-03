@@ -1,4 +1,4 @@
-package ch00;
+package util;
 
 import redis.clients.jedis.Jedis;
 

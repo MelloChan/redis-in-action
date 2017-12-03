@@ -1,6 +1,7 @@
 package ch00;
 
 import redis.clients.jedis.Jedis;
+import util.RedisServer;
 
 /**
  * list
