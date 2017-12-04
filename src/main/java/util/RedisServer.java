@@ -11,6 +11,9 @@ public class RedisServer {
         public static Jedis jedis = new Jedis("localhost");
     }
 
+    private RedisServer() {
+    }
+
     public static Jedis getInstance() {
         return ResourceHolder.jedis;
     }
