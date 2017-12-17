@@ -2,7 +2,27 @@
 
 系统化学习redis  
 
-### redis数据结构
+## 1. 初识redis
+
+### 1.1 redis简介
+redis:一个速度非常快的单线程NoSQL DB,可存储键与五种不同类型的值之间的映射.并
+且可以将存储在内存中的键值对持久化到硬盘,可以使用复制特性来扩展读性能,使用客户端
+分片来扩展写性能.既可作主存储也可为辅助数据库.支持复制/持久化/事务等手段保证数据完整性.  
+
+memcached:一款多线程高性能的键值缓存服务器(字符串类型),与redis性能几近,但redis能提供更加
+丰富的数据结构类型且能持久化数据.  
+
+两种持久化方法:①时间点转储 RDB "指定时间段内有指定数量的写操作执行"或"调用转储命令执行";
+②AOF 将所有修改了数据库的命令都写入一个只追加文件里面,使用者根据重要程度将只追加写入设置为
+从不同步/每秒同步一次/写入一个命令即同步  
+前者是默认持久化方式.  
+
+主从复制:执行复制的从数据库会连接上主数据库,接收主数据库的整个初始副本.每当主数据库执行
+写命令时,都会被发送给所有连接着的从数据库执行,从而实时更新数据库数据集.避免对主数据库的
+集中式访问.
+
+### 1.2 redis数据结构
+<a href="https://github.com/MelloChan/redis-in-action/tree/master/src/main/java/ch00">Java-demo</a>  
 
 字符串:    
 
@@ -139,3 +159,9 @@ demo:
 demo:  
   
 ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/zset.png)
+
+### 1.3 你好redis
+
+<a href="https://github.com/MelloChan/redis-in-action/blob/master/src/main/java/ch01/VoteServer.java">vote demo<a/>    
+
+## 2. 使用redis构建web应用
