@@ -1,6 +1,8 @@
 ﻿# redis-in-action
 
-系统化学习redis  
+系统化学习redis:       
+1.redis实战  
+2.redis设计与实现
 
 ## 1. 初识redis
 
