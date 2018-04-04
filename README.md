@@ -28,7 +28,7 @@ memcached:一款多线程高性能的键值缓存服务器(字符串类型),与r
 ### 1.2 redis数据结构
 [Java-demo](https://github.com/MelloChan/redis-in-action/tree/master/src/main/java/ch00)  
 
-[字符串](https://github.com/MelloChan/redis-in-action/content/sds.md):    
+[字符串](https://github.com/MelloChan/redis-in-action/blob/master/content/sds.md):    
 
 <table>
 <tr>
@@ -49,12 +49,12 @@ memcached:一款多线程高性能的键值缓存服务器(字符串类型),与r
 	<th>DEL</th>
 	<th>删除存储在给定键中值(通用命令)</th>
 </tr>
-</table>
-demo:  
+</table>  
 
+demo:  
 ![sds](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/string.png)  
   
-列表(和LinkedList差不多):  
+[列表](https://github.com/MelloChan/redis-in-action/blob/master/content/list.md):  
 <table>
 <tr>
 	<th>命令</th>
