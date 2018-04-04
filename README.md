@@ -19,12 +19,14 @@ memcached:一款多线程高性能的键值缓存服务器(字符串类型),与r
 
 主从复制:执行复制的从数据库会连接上主数据库,接收主数据库的整个初始副本.每当主数据库执行
 写命令时,都会被发送给所有连接着的从数据库执行,从而实时更新数据库数据集.避免对主数据库的
-集中式访问.
+集中式访问.   
+
+源码:redis是完全开源的.源码直接参阅-> https://github.com/antirez/redis
 
 ### 1.2 redis数据结构
-<a href="https://github.com/MelloChan/redis-in-action/tree/master/src/main/java/ch00">Java-demo</a>  
+[Java-demo](https://github.com/MelloChan/redis-in-action/tree/master/src/main/java/ch00)  
 
-字符串:    
+[字符串](https://github.com/MelloChan/redis-in-action/content/sds.md):    
 
 <table>
 <tr>
@@ -48,7 +50,7 @@ memcached:一款多线程高性能的键值缓存服务器(字符串类型),与r
 </table>
 demo:  
 
-![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/string.PNG)  
+![sds](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/string.png)  
   
 列表(和LinkedList差不多):  
 <table>
