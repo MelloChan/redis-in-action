@@ -81,7 +81,7 @@ demo:
   
 ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/list.png)
 
-集合(其实就是Java中HashSet):
+[集合](https://github.com/MelloChan/redis-in-action/blob/master/content/set.md):
 <table>
 <tr>
 	<th>命令</th>
@@ -108,7 +108,7 @@ demo:
  
  ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/set.png)
  
- 散列:
+ [字典](https://github.com/MelloChan/redis-in-action/blob/master/content/hash.md):
 <table>
 <tr>
 	<th>命令</th>
@@ -136,7 +136,7 @@ demo:
 
 ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/hash.png)
 
-有序集合(按照分值(浮点数)进行排序):
+[有序集合](https://github.com/MelloChan/redis-in-action/blob/master/content/zset.md)(按照分值(浮点数)进行排序):
 <table>
 <tr>
 	<th>命令</th>
