@@ -168,4 +168,4 @@ demo:
 
 <a href="https://github.com/MelloChan/redis-in-action/blob/master/src/main/java/ch01/VoteServer.java">vote demo<a/>    
 
-## 2. 使用redis构建web应用
+## 2. 单机数据库的实现
