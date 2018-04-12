@@ -1,8 +1,8 @@
 ﻿# redis-in-action
 
 系统化学习redis:       
-1.redis实战  
-2.redis设计与实现
+- [redis实战](http://www.java1234.com/a/javabook/database/2017/0625/8356.html)  
+- [redis设计与实现](https://pan.baidu.com/s/1skyxRqt)
 
 ## 1. 初识redis
 
