@@ -13,7 +13,7 @@
 
 - [数据库](https://github.com/MelloChan/redis-in-action/blob/master/content/db.md)
 - [RDB持久化](https://github.com/MelloChan/redis-in-action/blob/master/content/rdb.md)
-- [AOF持久化]((https://github.com/MelloChan/redis-in-action/blob/master/content/aof.md))
+- [AOF持久化](https://github.com/MelloChan/redis-in-action/blob/master/content/aof.md)
 - 事件
 - 客户端
 - 服务端
