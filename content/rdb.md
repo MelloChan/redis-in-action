@@ -46,6 +46,7 @@ int rdbLoad(char *filename, rdbSaveInfo *rsi) {
 因为BGSAVE命令可以在不阻塞服务器进程的情况下执行,所以Redis允许用户通过设置服务配置的save选项,让服务器每隔一段时间自动执行一次BGSAVE命令.  
 用户可以通过save选项设置多个保存条件,但只要任意一个条件被满足,服务器就会执行BGSAVE命令.服务器默认配置如下:    
 ```
+//  Windows环境下,redis.windows-service.conf文件
 save 900 1    // 服务器在900秒之内,对数据库进行了至少1次修改
 save 300 10   // 服务器在300秒之内,对数据库进行了至少10次修改
 save 60 1000  // 服务器在60秒之内,对数据库进行了至少1000次修改
