@@ -41,4 +41,61 @@ int rdbLoad(char *filename, rdbSaveInfo *rsi) {
 
 另外,执行BGSAVE时,客户端发送的SAVE(BGSAVE)命令将会被服务器拒绝执行,这是为了防止同时调用 rdbSave函数而导致产生竞争条件.同时在载入RDB文件期间,服务器会处于阻塞状态,直到工作完成.
 
-#### 
+#### 自动间隔性保存  
+
+因为BGSAVE命令可以在不阻塞服务器进程的情况下执行,所以Redis允许用户通过设置服务配置的save选项,让服务器每隔一段时间自动执行一次BGSAVE命令.  
+用户可以通过save选项设置多个保存条件,但只要任意一个条件被满足,服务器就会执行BGSAVE命令.服务器默认配置如下:    
+```
+save 900 1    // 服务器在900秒之内,对数据库进行了至少1次修改
+save 300 10   // 服务器在300秒之内,对数据库进行了至少10次修改
+save 60 1000  // 服务器在60秒之内,对数据库进行了至少1000次修改
+```  
+配置文件设置的save选项保存在[server.h](https://github.com/antirez/redis/blob/unstable/src/server.h)文件中,根据save选项设置saveparams属性:
+```
+struct redisServer {
+//  ...
+
+struct saveparam *saveparams; /* Save points array for RDB */
+
+//  ...
+}
+struct saveparam {
+    time_t seconds; // 秒数
+    int changes;    // 修改数
+};
+```  
+
+除了saveparams数组之外,服务器状态还维持着一个dirty计数器,以及lastsave属性:
+```
+struct redisServer {
+//  ...
+
+    long long dirty;                /* 计数器记录距离上一次成功执行SAVE命令或BGSAVE命令之后,服务器对数据库状态(服务器中的所有数据库)进行了多少次修改(包括写入、删除以及更新等操作) */
+   
+   
+    struct saveparam *saveparams;   /* Save points array for RDB */
+  
+    time_t lastsave; /*  Unix时间戳,记录了服务器上一次成功执行SAVE或BGSAVE命令的时间  */
+    
+//  ...       
+}
+```
+当服务器成功执行一个数据库修改命令之后,程序就会对dirty计数器进行更新:命令修改了多少次数据库,dirty计数器的值就增加多少.  
+例如,如果我们为一个字符串设置值:
+```
+redis> SET msg "hello"
+OK
+```
+那么dirty计数器的值将+1,而如果我们又向一个集合增加三个新元素:  
+```
+redis> SADD database Redis MongoDB MariaDB
+(integer) 3
+```
+那么dirty计数器的值将+3.  
+
+
+
+
+
+
+
