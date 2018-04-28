@@ -93,6 +93,15 @@ redis> SADD database Redis MongoDB MariaDB
 ```
 那么dirty计数器的值将+3.  
 
+#### 检查条件是否满足
+
+Redis的服务器周期性操作函数 serverCron 默认每个100毫秒就会执行一次,该函数用于对正在运行的服务器进行维护,它的其中一项工作就是检查save选项所设置的条件(遍历检查saveparams数组)是否满足,如果满足,就会执行BGSAVE命令.  
+
+#### RDB文件结构
+
+![RDB文件结构](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/redis-RDB文件结构.png)
+
+
 
 
 
