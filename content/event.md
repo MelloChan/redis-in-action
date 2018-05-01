@@ -21,6 +21,45 @@ redis基于Reactor模式开发了自己的网络事件处理器:这个处理器�
 I/O多路复用程序的实现:   
 ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/event-IO多路复用.png)  
 
-redis的I/O多路复用程序的所有功能都是通过包装常见的select、epoll、evport、kqueue这些I/O多路复用函数库来实现的.在源码中都对应了一个文件:
+redis的I/O多路复用程序的所有功能都是通过包装常见的select、epoll、evport、kqueue这些I/O多路复用函数库来实现的.在源码中都对应了一个文件:  
 ![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/event-IO多路复用函数.png)  
-redis为这些函数库都实现了相同的API,因此底层实现是可以互换的,通过宏定义了相应的规则,程序在编译时程序会自动选择系统中性能最高的函数库来作为redis的I/O多路复用程序的实现.  
+redis为这些函数库都实现了相同的API,因此底层实现是可以互换的,通过宏定义了相应的规则,程序在编译时程序会自动选择系统中性能最高的函数库来作为redis的I/O多路复用程序的实现.    
+```
+#ifdef HAVE_EVPORT
+#include "ae_evport.c"
+#else
+    #ifdef HAVE_EPOLL
+    #include "ae_epoll.c"
+    #else
+        #ifdef HAVE_KQUEUE
+        #include "ae_kqueue.c"
+        #else
+        #include "ae_select.c"
+        #endif
+    #endif
+#endif
+```
+
+在[ae.h](https://github.com/antirez/redis/blob/unstable/src/ae.h)文件中定义了事件类型:  
+```
+#define AE_NONE 0       /* No events registered. */
+#define AE_READABLE 1   /* Fire when descriptor is readable. */
+#define AE_WRITABLE 2   /* Fire when descriptor is writable. */
+#define AE_BARRIER 4    /* With WRITABLE, never fire the event if the
+                           READABLE event already fired in the same event
+                           loop iteration. Useful when you want to persist
+                           things to disk before sending replies, and want
+                           to do that in a group fashion. */
+```
+当套接字可读可写时会优先先读后写.在 [ae.c](https://github.com/antirez/redis/blob/unstable/src/ae.c) 中有各类事件处理(创建/删除/获取/阻塞等)api的具体实现.   
+而各类事件处理器则在 [networking.c](https://github.com/antirez/redis/blob/unstable/src/networking.c) 中有具体实现,有连接应答处理器、命令请求处理器、命令回复处理器以及复制处理器.其中最常用的是前三者,复制处理器主要用来处理redis的主从服务器进行复制操作时的处理.    
+
+一次完整的客户端与服务器连接事件:    
+![](https://raw.githubusercontent.com/MelloChan/redis-in-action/master/images/event-通信过程)
+
+
+  
+
+
+
+
